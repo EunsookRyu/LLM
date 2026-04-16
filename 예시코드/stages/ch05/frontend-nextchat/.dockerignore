@@ -1,0 +1,7 @@
+# frontend-nextchat/.dockerignore
+# 가이드 참조: chapter5_streamlit.md L240–L247
+node_modules/
+.next/
+.env.local
+*.log
+.git/

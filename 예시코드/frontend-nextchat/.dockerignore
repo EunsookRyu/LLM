@@ -1,0 +1,6 @@
+# frontend-nextchat/.dockerignore
+node_modules/
+.next/
+.env.local
+*.log
+.git/

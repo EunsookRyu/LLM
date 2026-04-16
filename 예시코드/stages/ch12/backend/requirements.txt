@@ -1,0 +1,11 @@
+# requirements.txt
+# 가이드 참조: chapter12_multi_engine.md L60–L63
+# Ch12 시점: openai 패키지 추가
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+httpx>=0.25.0
+python-dotenv>=1.0.0
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+qdrant-client>=1.9.0
+openai>=1.30.0

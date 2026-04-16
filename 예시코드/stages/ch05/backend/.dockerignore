@@ -1,0 +1,11 @@
+# backend/.dockerignore
+# 가이드 참조: chapter5_streamlit.md L466–L477
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.venv/
+venv/
+.env
+*.log
+.git/

@@ -1,0 +1,10 @@
+# requirements.txt
+# 가이드 참조: chapter7_qdrant.md L735–L743
+# Ch07 시점: ch04 의존성 + qdrant-client
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+httpx>=0.25.0
+python-dotenv>=1.0.0
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+qdrant-client>=1.9.0

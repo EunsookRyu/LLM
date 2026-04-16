@@ -1,0 +1,4 @@
+# frontend/requirements.txt
+# 가이드 참조: chapter5_streamlit.md L95–L99
+streamlit>=1.28.0
+requests>=2.31.0

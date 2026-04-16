@@ -1,0 +1,44 @@
+# 환경 변수 파일 — API 키 등 민감한 정보 포함
+.env
+.env.local
+.env.*.local
+
+# Python 가상환경 폴더
+venv/
+.venv/
+env/
+
+# Python 캐시 파일
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyc
+.pytest_cache/
+
+# 운영체제 생성 파일
+.DS_Store          # macOS
+Thumbs.db          # Windows
+desktop.ini        # Windows
+
+# 에디터 설정 폴더
+.vscode/
+.idea/
+
+# LLM 모델 파일 — 수 기가바이트에 달하는 대용량 파일
+*.gguf
+*.bin
+models/
+
+# 벡터 데이터베이스 저장 폴더
+chroma_db/
+qdrant_storage/
+
+# 로그 파일
+*.log
+logs/
+
+# 업로드된 문서 파일
+uploads/
+
+# Docker 볼륨 데이터
+data/

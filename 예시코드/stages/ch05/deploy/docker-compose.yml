@@ -1,0 +1,77 @@
+# docker-compose.yml
+# 가이드 참조: chapter5_streamlit.md L264–L340
+# Ch05 시점: 3-서비스 구성 (frontend + backend + qdrant)
+services:
+
+  # ─────────────────────────────────────────────
+  # 프론트엔드 — Streamlit
+  # ─────────────────────────────────────────────
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    container_name: chatbot-frontend
+    ports:
+      - "8501:8501"
+    environment:
+      - BACKEND_URL=http://backend:8000
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - chatbot-network
+
+  # ─────────────────────────────────────────────
+  # 백엔드 — FastAPI
+  # ─────────────────────────────────────────────
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: chatbot-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - CLOVA_API_KEY=${CLOVA_API_KEY}
+      - CLOVA_API_GATEWAY_KEY=${CLOVA_API_GATEWAY_KEY}
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
+    depends_on:
+      qdrant:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - chatbot-network
+
+  # ─────────────────────────────────────────────
+  # 벡터 데이터베이스 — Qdrant
+  # ─────────────────────────────────────────────
+  qdrant:
+    image: qdrant/qdrant:v1.9.4
+    container_name: chatbot-qdrant
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant-data:/qdrant/storage
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - chatbot-network
+
+volumes:
+  qdrant-data:
+
+networks:
+  chatbot-network:
+    driver: bridge
